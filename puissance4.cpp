@@ -108,17 +108,15 @@ short is_valid(unsigned short tableau[][7], unsigned short num_colonne){
     if(num_colonne <1 || num_colonne >7){
         return -1;
     }
-    while(tableau[num_ligne-1][num_colonne-1] != 0){
+    while(num_ligne <= 6 && tableau[6-num_ligne][num_colonne-1] != 0){
         num_ligne++;
     }
-    if(num_ligne>6)
-        return -1;
 
-    return num_ligne;
+    return num_ligne<=6?num_ligne:-1;
 }
 
 void affiche_tableau(unsigned short tab[][7]){
-    for(int i=5;i>=0;i--){
+    for(int i=0;i<6;i++){
             for(int j=0;j<7;j++){
                 cout << tab[i][j] << " ";
             }
