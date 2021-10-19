@@ -52,10 +52,6 @@ int main(){
                 cout << "match nul" << endl;
                 break;
             }
-            else {
-                cout << "match nul" << endl;
-                break;
-            }
           }
 
           //changement de joueur & retour aux conditions initiales du test de ligne dispo
