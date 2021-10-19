@@ -11,7 +11,6 @@ void draw_rectangle(window window, unsigned int pos_x, unsigned int pos_y, unsig
     draw_line(window, pos_x, pos_y+height, pos_x+width, pos_y+height);
 
 }
-
 void draw_rectangle_full(window window, unsigned int pos_x, unsigned int pos_y, unsigned int width, unsigned int height){
     unsigned int i;
     for(i=0 ; i<=height ; i++){
@@ -77,7 +76,6 @@ void splash()
     getch();
     close_window(w);
 }
-
 void draw_board(window window){
     int a = 0, b = 0;
     change_color(window, blue);
@@ -102,7 +100,6 @@ void put_jeton(window window, unsigned short num_ligne, unsigned short num_colon
     }
     draw_disk(window, num_colonne*100, 700-num_ligne*100, 40);
 }
-
 short is_valid(unsigned short tableau[][7], unsigned short num_colonne){
     short num_ligne=1;
     if(num_colonne <1 || num_colonne >7){
@@ -114,7 +111,6 @@ short is_valid(unsigned short tableau[][7], unsigned short num_colonne){
 
     return num_ligne<=6?num_ligne:-1;
 }
-
 void affiche_tableau(unsigned short tab[][7]){
     for(int i=0;i<6;i++){
             for(int j=0;j<7;j++){
@@ -122,4 +118,86 @@ void affiche_tableau(unsigned short tab[][7]){
             }
             cout << endl;
         };
+}
+unsigned short end_of_game(unsigned short t[][7], unsigned short c, unsigned short j,unsigned short l){
+    int l0 = l, alig=0, c0;
+    unsigned short inc = 0;
+    //test en colonne
+    if(l0>=4){
+        alig = 0;
+        while(l0 >= 1 && t[6-l0][c-1] == j){
+            alig++;
+            l0--;
+    }}
+    if(alig >=4){
+        return 1;
+    }
+
+    //test en ligne
+    //test de droite à gauche
+    c0 = c;
+    alig = 0;
+    while(c0>=0 && t[6-l][c0-1] == j){
+        c0--;
+        alig++;
+    }
+    if(alig >=4){
+        return 1;
+    }
+    //test de gauche à droite
+    c0 = c+1;
+    while(c0 <= 6 && t[6-l][c0-1] == j){
+        c0++;
+        alig++;
+    }
+    if(alig >=4){
+        return 1;
+    }
+
+    //test diagonale gauche à droite
+    c0 = c;
+    l0 = l;
+    alig = 0;
+    while(c0>=1 && l0 >=1 && t[6-l0][c0-1] == j){
+                  c0--;
+                  l0--;
+                  alig++;
+              }
+    c0 = c+1;
+    l0=l+1;
+    while(c0 <= 6 && l0 <= 6 && t[6-l0][c0-1] == j){
+                  l0++;
+                  c0++;
+                  alig++;
+              }
+    if(alig >=4){
+                  return 1;
+              }
+    //test diagonale droite à gauche
+    c0 = c;
+    l0 = l;
+    alig = 0;
+    while(c0<=6 && l0 >=1 && t[6-l0][c0] == j){
+                  c0++;
+                  l0--;
+                  alig++;
+              }
+    c0 = c-1;
+    l0=l+1;
+    while(c0 >=1 && l0 <= 6 && t[6-l0][c0] == j){
+                  l0++;
+                  c0--;
+                  alig++;
+              }
+    if(alig >=4){
+                  return 1;
+              }
+   for(int i=0 ; i<7 ; i++){
+       if(t[0][i] != 0){
+       inc++;
+   }}
+       if(inc >= 7 && alig != 4){
+           return 2;
+       }
+    return 0;
 }
