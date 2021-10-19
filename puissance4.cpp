@@ -3,7 +3,7 @@
 #include <Xgeii.h>
 
 using namespace std;
-
+//Dessine un rectangle
 void draw_rectangle(window window, unsigned int pos_x, unsigned int pos_y, unsigned int width, unsigned int height){
     draw_line(window, pos_x, pos_y, pos_x, pos_y+height);
     draw_line(window, pos_x, pos_y, pos_x+width, pos_y);
@@ -11,12 +11,14 @@ void draw_rectangle(window window, unsigned int pos_x, unsigned int pos_y, unsig
     draw_line(window, pos_x, pos_y+height, pos_x+width, pos_y+height);
 
 }
+//Dessine un rectangle plein
 void draw_rectangle_full(window window, unsigned int pos_x, unsigned int pos_y, unsigned int width, unsigned int height){
     unsigned int i;
     for(i=0 ; i<=height ; i++){
         draw_line(window, pos_x, pos_y+i, pos_x+width, pos_y+i);
     }
 }
+//Affiche le splash "Puissance 4"
 void splash()
 {
     window w = create_splash(680, 384, 425, 100, "splash", blue);
@@ -76,6 +78,7 @@ void splash()
     getch();
     close_window(w);
 }
+//Crée la fenêtre de jeu et dessine le plateau
 void draw_board(window window){
     int a = 0, b = 0;
     change_color(window, blue);
@@ -91,6 +94,7 @@ void draw_board(window window){
     a=0;
     }
 }
+//Affiche le jeton joué sur le plateau de jeu
 void put_jeton(window window, unsigned short num_ligne, unsigned short num_colonne, unsigned short num_joueur){
     if(num_joueur == 1){
         change_color(window, yellow);
@@ -100,6 +104,7 @@ void put_jeton(window window, unsigned short num_ligne, unsigned short num_colon
     }
     draw_disk(window, num_colonne*100, 700-num_ligne*100, 40);
 }
+//Teste la validité d'une colonne (existante ou pleine) et retourne la ligne jouable ou -1
 short is_valid(unsigned short tableau[][7], unsigned short num_colonne){
     short num_ligne=1;
     if(num_colonne <1 || num_colonne >7){
@@ -111,6 +116,7 @@ short is_valid(unsigned short tableau[][7], unsigned short num_colonne){
 
     return num_ligne<=6?num_ligne:-1;
 }
+//Afficher le tableau correspondant au plateau (debug)
 void affiche_tableau(unsigned short tab[][7]){
     for(int i=0;i<6;i++){
             for(int j=0;j<7;j++){
@@ -119,6 +125,7 @@ void affiche_tableau(unsigned short tab[][7]){
             cout << endl;
         };
 }
+//Tester l'alignement de 4 jetons et si le tableau est plein sans alignement
 unsigned short end_of_game(unsigned short t[][7], unsigned short c, unsigned short j,unsigned short l){
     int l0 = l, alig=0, c0;
     unsigned short inc = 0;

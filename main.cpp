@@ -4,7 +4,18 @@
 #include <puissance4.h>
 using namespace std;
 
+/*
+//Test de la structure pour revenir sur un coup
+struct retour {
+    unsigned short tableau[6][7];
+    string nom_joueur[2];
+    unsigned short joueur;
+    struct retour *psuivant;
+};
+typedef struct retour coup ; */
+
 int main(){
+
 
     //Déclarations du tableau représentant le plateau et des différentes variables
     unsigned short plateau[6][7] = {{0}};
